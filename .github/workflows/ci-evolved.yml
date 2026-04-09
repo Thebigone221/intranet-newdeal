@@ -59,6 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, security-scan, push]
     if: always()
+    continue-on-error: true
     steps:
       - name: Envoyer email
         uses: dawidd6/action-send-mail@v3
@@ -71,7 +72,7 @@ jobs:
           to: moussawade@groupeisi.com
           from: ${{ secrets.MAIL_USERNAME }}
           body: |
-            Pipeline executed sur branche dev.
+            Pipeline execute sur branche dev.
             Statut : ${{ job.status }}
             Commit : ${{ github.sha }}
             Auteur : ${{ github.actor }}
